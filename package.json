@@ -28,11 +28,10 @@
     "dev:jd": "npm run build:jd -- --watch",
     "dev:quickapp": "npm run build:quickapp -- --watch",
     "lint": "eslint src --ext ts,tsx,js,jsx --report-unused-disable-directives --max-warnings 0",
-    "prepare": "husky install",
-    "lint-staged": "npx lint-staged"
+    "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,vue}": "eslint --cache --fix"
+    "src/**/*.{js,jsx,ts,tsx,vue}": "eslint --cache --fix"
   },
   "browserslist": [
     "last 3 versions",
