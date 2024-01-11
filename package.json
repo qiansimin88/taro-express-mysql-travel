@@ -31,9 +31,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": [
-        "eslint --cache"
-      ]
+        "pre-commit": "eslint --cache"
     }
   },
   "browserslist": [
