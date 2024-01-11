@@ -1,6 +1,8 @@
 import { Component } from 'react'
 import './app.scss'
 
+const cv = 11
+
 class App extends Component {
 
   componentDidMount () {}

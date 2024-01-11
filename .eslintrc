@@ -1,9 +1,10 @@
 {
   "extends": ["taro/react"],
+  "parser": "@babel/eslint-parser",
   "rules": {
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
-    "no-unused-vars": ["error", { "varsIgnorePattern": "Taro|wx" }],
+    "no-unused-vars": ["error", { "varsIgnorePattern": "Taro|wx|definePageConfig|defineAppConfig" }],
     "no-mixed-spaces-and-tabs": 2, // 禁止空格和 tab 的混合缩进
     "no-debugger": 2, // 禁止所有 debugger
     "space-infix-ops": 2, // 要求所有操作符周围有空格
