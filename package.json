@@ -31,8 +31,11 @@
   },
   "husky": {
     "hooks": {
-        "pre-commit": "eslint --cache"
+        "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,vue}": "eslint --cache"
   },
   "browserslist": [
     "last 3 versions",
