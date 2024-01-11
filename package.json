@@ -27,12 +27,9 @@
     "dev:qq": "npm run build:qq -- --watch",
     "dev:jd": "npm run build:jd -- --watch",
     "dev:quickapp": "npm run build:quickapp -- --watch",
-    "lint": "eslint src --ext ts,tsx,js,jsx --report-unused-disable-directives --max-warnings 0"
-  },
-  "husky": {
-    "hooks": {
-        "pre-commit": "lint-staged"
-    }
+    "lint": "eslint src --ext ts,tsx,js,jsx --report-unused-disable-directives --max-warnings 0",
+    "prepare": "husky install",
+    "commit-check": "lint-staged"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,vue}": "eslint --cache"
@@ -76,7 +73,7 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "lint-staged": "^15.2.0",
     "postcss": "^8.4.18",
     "react-refresh": "^0.11.0",
