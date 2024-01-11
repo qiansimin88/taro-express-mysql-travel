@@ -29,7 +29,7 @@
     "dev:quickapp": "npm run build:quickapp -- --watch",
     "lint": "eslint src --ext ts,tsx,js,jsx --report-unused-disable-directives --max-warnings 0",
     "prepare": "husky install",
-    "commit-check": "lint-staged"
+    "commit-check": "npx lint-staged"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,vue}": "eslint --cache"
