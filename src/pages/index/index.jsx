@@ -40,7 +40,7 @@ const Index = () => {
       {
         DEFAULT_TAB_LIST[tabIndex]['tab'] === 'flight'
           ?
-          <FlightIndex />
+          <FlightIndex flightIndex={{dptCityName: '上海', arrCityName: '北京'}} />
           : <NoExploit />
       }
     </View>

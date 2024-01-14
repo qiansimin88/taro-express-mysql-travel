@@ -18,7 +18,7 @@
       font-weight: 600;
       height: 112px;
       line-height: 112px;
-      border-bottom: 10px solid #eee;
+      border-bottom: 1px solid #eee;
       display: flex;
       &.date {
         border-bottom: none !important;
@@ -27,7 +27,7 @@
   }
   .station .from,
   .station .to {
-    width: 45%;
+    flex: 1;
     opacity: 1;
     transition: all 0.5s ease-out;
   }
@@ -52,11 +52,11 @@
     right: 0px;
   }
   .station .from.exchange {
-    transform: translate3d(100%, 0, 0);
+    transform: translateX(calc(100% + 40px));
     text-align: right;
   }
   .station .to.exchange {
-    transform: translate3d(-100%, 0, 0);
+    transform: translateX(calc(-100% - 40px));
     text-align: left;
   }
   .station .from.slide {
@@ -70,26 +70,20 @@
     opacity: 0;
   }
   .icon-zhihuan {
-    flex: 1;
     text-align: center;
+    width: 40px;
     font-size: 40px;
     line-height: 110px;
     font-weight: bolder;
+    transition: transform 0.4s ease-out;
   }
 
   .icon-zhihuan {
     &.active {
-      animation: rotate 0.5s ease;
+      transform: rotate(180deg);
     }
   }
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+
 
   .search-btn {
     background: #{$primaryColor};
