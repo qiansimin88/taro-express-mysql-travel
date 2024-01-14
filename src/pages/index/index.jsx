@@ -1,25 +1,50 @@
-import { Component } from 'react'
-import { View, Text } from '@tarojs/components'
+import { useState } from 'react'
+import { View } from '@tarojs/components'
 import './index.scss'
 
+import FlightIndex from '../flight/index'
+import NoExploit from '../../components/NoExploit'
 
-export default class Index extends Component {
 
-  componentWillMount () { }
+const DEFAULT_TAB_LIST = [
+  { title: "机票", tab: "flight", index: 0 },
+  { title: "火车票", tab: "train", index: 1 },
+  { title: "酒店", tab: "hotel", index: 2 },
+  { title: "汽车票", tab: "bus", index: 3 },
+]
 
-  componentDidMount () { }
+const Index = () => {
 
-  componentWillUnmount () { }
+  const [tabIndex, setTabIndex] = useState(0)
 
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    return (
-      <View className='index'>
-        <Text>Hello world!</Text>
-      </View>
-    )
+  const innerStyle = {
+    width: `${100 / DEFAULT_TAB_LIST.length}%`,
+    transform: `translateX(${tabIndex * 100}%)`
   }
+
+  return (
+    <View className='index-container'>
+      <View className='top'>
+        <View className='index-tab'>
+          {
+            DEFAULT_TAB_LIST.map(o => (
+              <View onClick={() => setTabIndex(o.index)} className={`index_tab_item ${o.tab} ${tabIndex === o.index ? ' current' : ''}`} key={o.tab}>
+                { o.title }
+              </View>
+            ))
+          }
+        </View>
+        <View className='scrollbar' style={innerStyle}>
+        </View>
+      </View>
+      {
+        DEFAULT_TAB_LIST[tabIndex]['tab'] === 'flight'
+          ?
+          <FlightIndex />
+          : <NoExploit />
+      }
+    </View>
+  )
 }
+
+export default Index;
