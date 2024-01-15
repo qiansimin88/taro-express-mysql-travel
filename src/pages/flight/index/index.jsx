@@ -1,4 +1,4 @@
-import { View, SwiperItem, Text } from "@tarojs/components";
+import { View, SwiperItem, Swiper, Text, Image } from "@tarojs/components";
 import "./index.scss";
 
 import Tab from "../../../components/Tab";
@@ -29,6 +29,8 @@ const FlightIndex = ({
 }) => {
 
   const [isExchange, setIsExchange] = useState(false)
+  const [adList, setAdList] = useState([])
+  setAdList()
 
   const onTaClickHanlder = () => {
     console.log(11)
@@ -81,6 +83,19 @@ const FlightIndex = ({
           <NoExploit className='no-data' />
         </SwiperItem>
       </Tab>
+    </View>
+    <View className='alipay-swiper' style={{margin: '15px'}}>
+      <Swiper className='advs-banner-bd' autoplay circular interval={3000}>
+        {
+          adList.map(item => {
+            return (
+              <SwiperItem key={item.id} className='item'>
+                <Image className='img' src={item.imgUrl}></Image>
+              </SwiperItem>
+            )
+          })
+        }
+      </Swiper>
     </View>
   </View>;
 };
