@@ -4,6 +4,7 @@ import "./index.scss";
 import Tab from "../../../components/Tab";
 import NoExploit from '../../../components/NoExploit'
 import { useState, useEffect } from "react";
+import apis from '../../../api'
 
 
 const FLIGHT_TABS = [
@@ -30,7 +31,6 @@ const FlightIndex = ({
 
   const [isExchange, setIsExchange] = useState(false)
   const [adList, setAdList] = useState([])
-  setAdList()
 
   const onTaClickHanlder = () => {
     console.log(11)
@@ -41,8 +41,20 @@ const FlightIndex = ({
   }
 
   useEffect(() => {
-    console.log(isExchange)
-  }, [isExchange])
+    apis.adsBannerImg()
+      .then(res => {
+        const {
+          data: { result }
+        } = res
+        if (result) {
+          setAdList(result)
+        }
+      })
+  }, [])
+
+  // useEffect(() => {
+  //   console.log(isExchange)
+  // }, [isExchange])
 
   return <View className='flight-container'>
     <View className='flight-top'>
@@ -87,10 +99,10 @@ const FlightIndex = ({
     <View className='alipay-swiper' style={{margin: '15px'}}>
       <Swiper className='advs-banner-bd' autoplay circular interval={3000}>
         {
-          adList.map(item => {
+          adList?.map(item => {
             return (
-              <SwiperItem key={item.id} className='item'>
-                <Image className='img' src={item.imgUrl}></Image>
+              <SwiperItem key={item?.id} className='item'>
+                <Image className='img' src={item?.url}></Image>
               </SwiperItem>
             )
           })

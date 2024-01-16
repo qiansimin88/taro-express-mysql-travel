@@ -23,7 +23,8 @@ const createTable = async () => {
         url varchar(255) not null
       ) engine=innodb default charset=utf8;
     `;
-
+    // 先删除表后创建
+    await sqlQuery(`drop table if exists ads`);
     // 创建表
     await sqlQuery(createTableSql);
     // 表里面插入数据
