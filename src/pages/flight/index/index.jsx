@@ -52,9 +52,9 @@ const FlightIndex = ({
       })
   }, [])
 
-  // useEffect(() => {
-  //   console.log(isExchange)
-  // }, [isExchange])
+  useEffect(() => {
+    console.log(isExchange)
+  }, [isExchange])
 
   return <View className='flight-container'>
     <View className='flight-top'>
