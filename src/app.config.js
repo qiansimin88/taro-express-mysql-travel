@@ -1,5 +1,5 @@
 export default {
-  pages: ["pages/index/index", "pages/order/order"],
+  pages: ["pages/index/index", "pages/order/order", "pages/airportlist/index"],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#fff",
@@ -19,7 +19,7 @@ export default {
       },
       {
         text: "我的订单",
-        pagePath: "pages/order/order",
+        pagePath: "pages/airportlist/index",
         iconPath: "assets/images/order-unselected.png",
         selectedIconPath: "assets/images/order-selected.png",
       },

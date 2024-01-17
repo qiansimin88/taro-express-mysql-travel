@@ -3,7 +3,8 @@ import { View } from '@tarojs/components'
 import './index.scss'
 
 import FlightIndex from '../flight/index'
-import NoExploit from '../../components/NoExploit'
+import NoExploit from '../../components/noexploit'
+// import { request } from '../../common/utils'
 
 
 const DEFAULT_TAB_LIST = [

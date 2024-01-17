@@ -2,7 +2,7 @@ import { View, SwiperItem, Swiper, Text, Image } from "@tarojs/components";
 import "./index.scss";
 
 import Tab from "../../../components/Tab";
-import NoExploit from '../../../components/NoExploit'
+import NoExploit from '../../../components/noexploit'
 import { useState, useEffect } from "react";
 import apis from '../../../api'
 
@@ -52,9 +52,9 @@ const FlightIndex = ({
       })
   }, [])
 
-  useEffect(() => {
-    console.log(isExchange)
-  }, [isExchange])
+  // useEffect(() => {
+  //   console.log(isExchange)
+  // }, [isExchange])
 
   return <View className='flight-container'>
     <View className='flight-top'>

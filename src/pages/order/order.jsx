@@ -1,25 +1,13 @@
-import { Component } from 'react'
 import { View, Text } from '@tarojs/components'
-import './order.scss'
+// import {request} from '../../common/utils'
 
-
-export default class Index extends Component {
-
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    return (
-      <View className='index'>
-        <Text>我的订单</Text>
-      </View>
-    )
-  }
+const Order = () => {
+  return (
+    <View className='index'>
+      <Text>我的122订单</Text>
+    </View>
+  )
 }
+
+
+export default Order

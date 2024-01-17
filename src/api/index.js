@@ -11,4 +11,11 @@ export default {
       params,
     });
   },
+  airportCityListReq(params) {
+    return request({
+      url: `${API_PRE}/city/airportList`,
+      method: "GET",
+      params,
+    });
+  },
 };
