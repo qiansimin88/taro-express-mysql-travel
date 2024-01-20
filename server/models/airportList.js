@@ -36,17 +36,17 @@ router.get("/airportList", async (req, res) => {
   try {
     const result = await sqlQuery(strSql);
     // 按照首字母排序
-    // if (Array.isArray(result) && result.length) {
-    //   // sort方法是按照字符串到ASCII进行排序
-    //   result.sort((x, y) => {
-    //     if (x.firstLetter < y.firstLetter) {
-    //       return -1;
-    //     } else if (x.firstLetter > y.firstLetter) {
-    //       return 1;
-    //     }
-    //     return 0;
-    //   });
-    // }
+    if (Array.isArray(result) && result.length) {
+      // sort方法是按照字符串到ASCII进行排序
+      result.sort((x, y) => {
+        if (x.firstLetter < y.firstLetter) {
+          return -1;
+        } else if (x.firstLetter > y.firstLetter) {
+          return 1;
+        }
+        return 0;
+      });
+    }
     res.send({
       code: 1,
       mes: "请求成功",

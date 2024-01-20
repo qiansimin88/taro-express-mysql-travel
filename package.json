@@ -28,7 +28,7 @@
 		"dev:jd": "npm run build:jd -- --watch",
 		"dev:quickapp": "npm run build:quickapp -- --watch",
 		"lint": "eslint src --ext ts,tsx,js,jsx --report-unused-disable-directives --max-warnings 0",
-    "nodeserver": "nodemon server/index.js",
+		"nodeserver": "nodemon server/index.js",
 		"prepare": "husky install"
 	},
 	"lint-staged": {
@@ -75,7 +75,7 @@
 		"eslint-config-taro": "3.6.22",
 		"eslint-plugin-import": "^2.12.0",
 		"eslint-plugin-react": "^7.8.2",
-		"eslint-plugin-react-hooks": "^4.2.0",
+		"eslint-plugin-react-hooks": "5.0.0-canary-feed8f3f9-20240118",
 		"husky": "^8.0.0",
 		"lint-staged": "^15.2.0",
 		"nodemon": "^3.0.2",

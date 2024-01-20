@@ -19,7 +19,7 @@ export default {
       },
       {
         text: "我的订单",
-        pagePath: "pages/airportlist/index",
+        pagePath: "pages/order/order",
         iconPath: "assets/images/order-unselected.png",
         selectedIconPath: "assets/images/order-selected.png",
       },

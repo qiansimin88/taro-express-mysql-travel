@@ -15,7 +15,7 @@ export const request = ({
       ...other,
     })
       .then((res) => {
-        resolve(res);
+        resolve(res?.data);
       })
       .catch((err) => {
         reject(err);
