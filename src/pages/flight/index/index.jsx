@@ -1,11 +1,14 @@
 import { View, SwiperItem, Swiper, Text, Image } from "@tarojs/components";
-import "./index.scss";
+import Taro from '@tarojs/taro'
 
 import Tab from "../../../components/Tab";
 import NoExploit from '../../../components/noexploit'
 import { useState, useEffect } from "react";
+import { useAirportModel } from '@/model/airport-model'
+
 import apis from '../../../api'
 
+import "./index.scss";
 
 const FLIGHT_TABS = [
   {
@@ -22,12 +25,15 @@ const FLIGHT_TABS = [
   }
 ]
 
-const FlightIndex = ({
-  flightIndex: {
-    dptCityName,
-    arrCityName
-  }
-}) => {
+const FlightIndex = () => {
+  // hox 的 store 订阅 hook
+  const {
+    airportInfoState: {
+      dptCityName,
+      arrCityName
+    },
+    changeAirportInfo,
+  } = useAirportModel()
 
   const [isExchange, setIsExchange] = useState(false)
   const [adList, setAdList] = useState([])
@@ -36,15 +42,19 @@ const FlightIndex = ({
     console.log(11)
   }
 
-  const chooseFlightCity = (name) => {
-    console.log(name)
+  // 改变当前选择的城市 出发类型
+  const chooseFlightCity = (cityType) => {
+    changeAirportInfo({ cityType })
+    Taro.navigateTo({
+      url: '/pages/airportlist/index'
+    })
   }
 
   useEffect(() => {
     apis.adsBannerImg()
       .then(res => {
         const {
-          data: { result }
+          result
         } = res
         if (result) {
           setAdList(result)

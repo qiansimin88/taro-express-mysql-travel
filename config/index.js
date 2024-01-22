@@ -24,6 +24,7 @@ const config = {
     "@/components": path.resolve(__dirname, "..", "src/components"),
     "@/common": path.resolve(__dirname, "..", "src/common"),
     "@/api": path.resolve(__dirname, "..", "src/api"),
+    "@/model": path.resolve(__dirname, "..", "src/model"),
   },
   framework: "react",
   compiler: "webpack5",

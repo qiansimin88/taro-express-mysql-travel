@@ -57,6 +57,7 @@
 		"@tarojs/shared": "3.6.22",
 		"@tarojs/taro": "3.6.22",
 		"express": "^4.18.2",
+		"hox": "^2.1.1",
 		"mysql2": "^3.7.0",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0"
