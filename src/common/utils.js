@@ -22,3 +22,23 @@ export const request = ({
       });
   });
 };
+
+export const navigateTo = (uri, params = {}) => {
+  let itemArray = [];
+  if (typeof params === "object" && Object.keys(params).length) {
+    for (const o in params) {
+      itemArray.push(`${o}=${params[o]}`);
+    }
+    params = itemArray.join("&");
+  }
+
+  if (uri.indexOf("?") > -1) {
+    uri = `${uri}&${params}`;
+  } else {
+    uri = `${uri}?${params}`;
+  }
+
+  return Taro.navigateTo({
+    url: uri,
+  });
+};

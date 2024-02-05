@@ -1,10 +1,11 @@
-import { View, SwiperItem, Swiper, Text, Image } from "@tarojs/components";
-import Taro from '@tarojs/taro'
-
+import { View, SwiperItem, Swiper, Text, Image, Button } from "@tarojs/components";
+import Taro, { useReady } from '@tarojs/taro'
+import dayjs from 'dayjs'
 import Tab from "../../../components/Tab";
 import NoExploit from '../../../components/noexploit'
 import { useState, useEffect } from "react";
 import { useAirportModel } from '@/model/airport-model'
+import { navigateTo, request } from '@/common/utils'
 
 import apis from '../../../api'
 
@@ -29,8 +30,9 @@ const FlightIndex = () => {
   // hox 的 store 订阅 hook
   const {
     airportInfoState: {
-      dptCityName,
-      arrCityName
+      dptCityName,   // 出发城市
+      dptDate,      // 出发日期
+      arrCityName,   // 到达城市
     },
     changeAirportInfo,
   } = useAirportModel()
@@ -50,6 +52,49 @@ const FlightIndex = () => {
     })
   }
 
+  // 获取用户定位
+  const getLocation = () => {
+    Taro.getLocation({
+      isHighAccuracy: true,
+      type: 'gcj02'
+    }).then(res => {
+      // 经纬度
+      const {
+        latitude,
+        longitude
+      } = res
+
+      // 微信小程序中实现定位以及逆地址解析
+      //https://developers.weixin.qq.com/community/develop/article/doc/00040c93bc00b8298acb46e6456813 注册腾讯地址获取 KEY
+      // 请求腾讯地图接口获取准确地址
+      request({
+        url: `https://apis.map.qq.com/ws/geocoder/v1/?key=JKLBZ-WN3K4-HFSU6-DB5UU-2FGCS-CLB4J&location=${latitude},${longitude}`
+      })
+        .then( addr => {
+          const {
+            result: {
+              ad_info: {
+                city_code,
+                city
+              }  // 准确地址
+            }
+          } = addr
+
+          // 修改出发城市的城市 城市默认就是定位城市
+          changeAirportInfo({
+            dptCityName: city || '上海',
+            dptCityId: city_code || 2
+          })
+        })
+    })
+      .catch( () => {
+        Taro.showToast({
+          title: '获取位置失败',
+          icon: 'error'
+        })
+      })
+  }
+
   useEffect(() => {
     apis.adsBannerImg()
       .then(res => {
@@ -60,7 +105,13 @@ const FlightIndex = () => {
           setAdList(result)
         }
       })
+    // getLocation()
   }, [])
+
+  // 只执行一次的周期
+  useReady(() => {
+    getLocation()
+  })
 
   // useEffect(() => {
   //   console.log(isExchange)
@@ -95,6 +146,17 @@ const FlightIndex = () => {
               {arrCityName}
             </View>
           </View>
+          <View className='item date'onClick={
+            () => {
+              navigateTo('/pages/calendar/index')
+            }
+          }
+          >
+            { dayjs(dptDate).format('M月D日') }
+          </View>
+          <Button className='search-btn'>
+              机票查询
+          </Button>
         </SwiperItem>
         {/*  往返  */}
         <SwiperItem>

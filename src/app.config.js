@@ -1,5 +1,10 @@
 export default {
-  pages: ["pages/index/index", "pages/order/order", "pages/airportlist/index"],
+  pages: [
+    "pages/index/index",
+    "pages/order/order",
+    "pages/airportlist/index",
+    "pages/calendar/index",
+  ],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#fff",
@@ -25,4 +30,11 @@ export default {
       },
     ],
   },
+  // 定位权限
+  permission: {
+    "scope.userLocation": {
+      desc: "为了更好的服务体验，我们希望获取你的位置",
+    },
+  },
+  requiredPrivateInfos: ["getLocation", "chooseLocation"],
 };
