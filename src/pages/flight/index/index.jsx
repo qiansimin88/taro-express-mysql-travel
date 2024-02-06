@@ -32,7 +32,11 @@ const FlightIndex = () => {
     airportInfoState: {
       dptCityName,   // 出发城市
       dptDate,      // 出发日期
+      dptAirportName,
+      arrCityId,
       arrCityName,   // 到达城市
+      arrAirportName,
+      cityType
     },
     changeAirportInfo,
   } = useAirportModel()
@@ -45,8 +49,8 @@ const FlightIndex = () => {
   }
 
   // 改变当前选择的城市 出发类型
-  const chooseFlightCity = (cityType) => {
-    changeAirportInfo({ cityType })
+  const chooseFlightCity = (ct) => {
+    changeAirportInfo({ cityType: ct })
     Taro.navigateTo({
       url: '/pages/airportlist/index'
     })
@@ -113,10 +117,6 @@ const FlightIndex = () => {
     getLocation()
   })
 
-  // useEffect(() => {
-  //   console.log(isExchange)
-  // }, [isExchange])
-
   return <View className='flight-container'>
     <View className='flight-top'>
       <Tab tabList={FLIGHT_TABS} initTab={0} onTaClick={onTaClickHanlder} className='flight-index-tab'>
@@ -154,7 +154,21 @@ const FlightIndex = () => {
           >
             { dayjs(dptDate).format('M月D日') }
           </View>
-          <Button className='search-btn'>
+          <Button className='search-btn' onClick={() => {
+            navigateTo(
+              '/pages/flight/list/list',
+              {
+                dptCityName,   // 出发城市
+                dptDate,      // 出发日期
+                dptAirportName,
+                arrCityId,
+                arrCityName,   // 到达城市
+                arrAirportName,
+                cityType
+              }
+            )
+          }}
+          >
               机票查询
           </Button>
         </SwiperItem>

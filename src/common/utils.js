@@ -23,7 +23,7 @@ export const request = ({
   });
 };
 
-export const navigateTo = (uri, params = {}) => {
+export const navigateTo = (uri, params) => {
   let itemArray = [];
   if (typeof params === "object" && Object.keys(params).length) {
     for (const o in params) {
@@ -32,10 +32,12 @@ export const navigateTo = (uri, params = {}) => {
     params = itemArray.join("&");
   }
 
-  if (uri.indexOf("?") > -1) {
-    uri = `${uri}&${params}`;
-  } else {
-    uri = `${uri}?${params}`;
+  if (!!params) {
+    if (uri.indexOf("?") > -1) {
+      uri = `${uri}&${params}`;
+    } else {
+      uri = `${uri}?${params}`;
+    }
   }
 
   return Taro.navigateTo({

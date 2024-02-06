@@ -4,6 +4,7 @@ export default {
     "pages/order/order",
     "pages/airportlist/index",
     "pages/calendar/index",
+    "pages/flight/list/list",
   ],
   window: {
     backgroundTextStyle: "light",
