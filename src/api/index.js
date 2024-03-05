@@ -11,9 +11,18 @@ export default {
       params,
     });
   },
+  // 城市机场列表
   airportCityListReq(params) {
     return request({
       url: `${API_PRE}/city/airportList`,
+      method: "GET",
+      params,
+    });
+  },
+  // 机场航班信息列表
+  airFlightListReq(params) {
+    return request({
+      url: `${API_PRE}/airList/singleList`,
       method: "GET",
       params,
     });

@@ -3,4 +3,5 @@ module.exports = (app) => {
   // 路由注入
   app.use("/ads", require("./ads"));
   app.use("/city", require("./airportList"));
+  app.use("/airList", require("./airList"));
 };
