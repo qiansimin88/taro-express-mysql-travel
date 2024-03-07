@@ -6,6 +6,7 @@ export default {
     "pages/calendar/index",
     "pages/flight/list/list",
     "pages/flight/detail/detail",
+    "pages/login/login",
   ],
   window: {
     backgroundTextStyle: "light",
