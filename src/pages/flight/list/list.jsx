@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, Block, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import dayjs from "dayjs";
-import { weekDay } from "@/common/utils";
+import { weekDay, navigateTo } from "@/common/utils";
 import { useAirportModel } from '@/model/airport-model'
 import Skeleton from 'taro-skeleton'
 import apis from '@/api'
@@ -31,7 +31,6 @@ const formatDateList = () => {
 };
 
 const FlightList = () => {
-
   // hox 的 store 订阅 hook
   const {
     airportInfoState: {
@@ -96,7 +95,7 @@ const FlightList = () => {
   }, [])
 
   useEffect(() => {
-    // 路由参数
+    // 通过 Taro实例 获取 路由参数
     const {
       params
     } = Taro.getCurrentInstance().router
@@ -167,7 +166,11 @@ const FlightList = () => {
                   }
                   <View
                     className='list-item'
-                    onClick={() => this.onFlightClick(flight)}
+                    onClick={() => {
+                      navigateTo('/pages/flight/detail/detail', {
+                        ...flight
+                      })
+                    }}
                   >
                     <View className='item-price'>
                       <View className='flight-row'>
