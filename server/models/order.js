@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 const { sqlQuery } = require("../mysql");
 
-router.post("/createorder", async (req, res) => {
+router.post("/createOrder", async (req, res) => {
   try {
     const { userPhone, orderInfo } = req.body;
     const { dptCityName, arrCityName, dptTimeStr, dptTime, price } = orderInfo;
