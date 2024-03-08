@@ -1,17 +1,17 @@
 import apis from '@/api'
-import { showToast, setStorageSync, navigateBack} from '@tarojs/taro'
+import { setStorageWithCache } from '@/common/utils'
+import { showToast, navigateBack} from '@tarojs/taro'
 import { useUserInfoModel } from '@/model/userInfo-model'
 import { View, Input, Button, Form } from '@tarojs/components'
 import './index.scss'
 
 
 const LoginPage = () => {
-
   // hox 的 store 订阅 hook
-
   const {
   // eslint-disable-next-line
     userInfoState,
+    changeUserInfoState
   } = useUserInfoModel()
 
   const formSubmit = (e) => {
@@ -42,9 +42,15 @@ const LoginPage = () => {
               icon: 'success',
               duration: 1000,
               complete() {
-                setStorageSync('userInfo', {
+                // 模拟缓存 20 秒
+                setStorageWithCache('userInfo', {
                   nickName,
                   userPhone
+                }, 300)
+                changeUserInfoState({
+                  isLogin: true,
+                  userPhone,
+                  nickName
                 })
                 navigateBack()
               }

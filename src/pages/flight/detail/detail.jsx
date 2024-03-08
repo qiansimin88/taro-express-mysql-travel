@@ -1,10 +1,12 @@
 
-
-
-import { View,Text, Image, Button } from "@tarojs/components";
-import Taro, { getCurrentInstance, useShareAppMessage } from '@tarojs/taro'
+import { View,Text, Image, Button, Input } from "@tarojs/components";
+// eslint-disable-next-line
+import Taro, { getCurrentInstance, useShareAppMessage, showToast, showLoading, hideLoading, switchTab } from '@tarojs/taro'
 import dayjs from 'dayjs'
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useUserInfoModel } from '@/model/userInfo-model'
+import apis from '@/api'
+
 
 import "./index.scss";
 
@@ -25,6 +27,21 @@ const FlightDetail = (props) => {
     price,
   } = nowSelectedFlight
 
+  // hox 的 store 订阅 hook
+  const {
+    // eslint-disable-next-line
+      userInfoState: {
+      isLogin,
+      userPhone,
+      nickName
+    }
+  } = useUserInfoModel()
+
+  useEffect(() => {
+    console.log(isLogin, userPhone, nickName)
+  }, [])
+
+
   // 分享
   useShareAppMessage(()=> {
     return {
@@ -33,6 +50,55 @@ const FlightDetail = (props) => {
       imageUrl: 'http://www.picsum.photos/400/300',
     }
   })
+
+  const createOrderHandler = () => {
+    showLoading()
+    apis.postCreateOrder({
+      userPhone,
+      orderInfo: nowSelectedFlight
+    })
+      .then(res => {
+        const {
+          message,
+          code
+        } = res
+
+        //  成功
+        if (code === 1) {
+          showToast(
+            {
+              title: message,
+              icon: 'success',
+              duration: 1000,
+              complete() {
+                // switchTab({
+                //   url: '/pages/order/order'
+                // })
+              }
+            }
+          )
+          // 失败
+        } else {
+          showToast(
+            {
+              title: message,
+              icon: 'error',
+              duration: 1000
+            }
+          )
+        }
+      }).catch(() => {
+        showToast(
+          {
+            title: '网络错误',
+            icon: 'error',
+            duration: 1000
+          }
+        )
+      }).finally(() => {
+        hideLoading()
+      })
+  }
 
   return (
     <View className='detail-container'>
@@ -61,15 +127,15 @@ const FlightDetail = (props) => {
       </View>
       <View className='passenger-box module-box'>
         <Text className='title'>乘机人</Text>
-        {/* {
-          isLogin ? <View className='name'>{nickName}</View> : <Button className='add-btn name' onClick={tools.doLogin}>新增</Button>
-        } */}
+        {
+          isLogin ? <View className='name'>{nickName}</View> : <Button className='add-btn name' >新增</Button>
+        }
       </View>
       <View className='passenger-box module-box'>
         <Text className='title'>联系手机</Text>
         <View className='phone-box'>
           <Text className='num-pre'>+86 </Text>
-          {/* <Input disabled placeholder='请输入乘机人手机号' value={userPhone}></Input> */}
+          <Input disabled placeholder='请输入乘机人手机号' value={userPhone}></Input>
         </View>
       </View>
       {/* 测试Taro bug */}
@@ -93,7 +159,7 @@ const FlightDetail = (props) => {
         <View className='color-red'>
         ¥ <Text className='price color-red'>{price}</Text>
         </View>
-        {/* <View className='order-btn' onClick={this.onOrder}>订</View> */}
+        <View className='order-btn' onClick={createOrderHandler}>订</View>
       </View>
       <Button className='share-btn' openType='share'>快将行程分享给好友吧</Button>
       {/*  机票底部  */}
