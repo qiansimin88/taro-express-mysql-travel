@@ -113,3 +113,7 @@ export const isLoginAuthHandler = (uri) => {
     });
   }
 };
+
+export const isAliPay = Taro.ENV_TYPE.ALIPAY === Taro.getEnv();
+export const isBaiDu = Taro.ENV_TYPE.SWAN === Taro.getEnv();
+export const isH5 = Taro.ENV_TYPE.WEB === Taro.getEnv();

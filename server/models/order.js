@@ -32,7 +32,28 @@ router.post("/createOrder", async (req, res) => {
   } catch (err) {
     res.send({
       code: -1,
-      mes: "请求失败",
+      message: "请求失败",
+      result: err,
+    });
+  }
+});
+
+// 查询订单
+router.post("/getOrderList", async (req, res) => {
+  try {
+    const { userPhone } = req.body;
+    // desc: 降序查询 asc: 升序   by id 对 ID 进行降序查询
+    const querySql = `select * from orderList where userPhone=${userPhone} order by id desc`;
+    const result = await sqlQuery(querySql);
+    res.send({
+      code: 1,
+      message: "查询成功",
+      result,
+    });
+  } catch (err) {
+    res.send({
+      code: -1,
+      message: "查询失败",
       result: err,
     });
   }

@@ -10,4 +10,12 @@ export default {
       params,
     });
   },
+  //  创建预定订单
+  postGetOrderList(params) {
+    return request({
+      url: `${API_PRE}/order/getOrderList`,
+      method: "POST",
+      params,
+    });
+  },
 };
