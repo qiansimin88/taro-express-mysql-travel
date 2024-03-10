@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import { weekDay, navigateTo } from "@/common/utils";
 import { useAirportModel } from '@/model/airport-model'
 import Skeleton from 'taro-skeleton'
+import VirtualList from '@/components/virtualList'
 import apis from '@/api'
 import { MIN_DATE, MAX_DATE, ERR_NET_MESSAGE } from "@/common/constant";
 import { useEffect, useState, useMemo } from 'react'
@@ -11,7 +12,6 @@ import { useEffect, useState, useMemo } from 'react'
 
 import "./list.scss";
 import 'taro-skeleton/dist/index.css'
-
 
 
 const formatDateList = () => {
@@ -105,7 +105,63 @@ const FlightList = () => {
     })
   }, [])
 
-
+  // 提供给虚拟列表的 item 渲染函数
+  const onRenderItem = (flight, index) => {
+    const {
+      dptTimeStr,
+      arrTimeStr,
+      airIcon,
+      airCompanyName,
+      price,
+    } = flight;
+    return (
+      <Block key={flight.id}>
+        {
+          index === 3 && (
+            <View className='notice'>
+              <Image className='notice-logo' src='https://i.postimg.cc/dhGPDTjq/2.png'></Image>
+              <Text className='notice-text'>价格可能会上涨，建议尽快预定</Text>
+            </View>
+          )
+        }
+        <View
+          className='list-item'
+          onClick={() => {
+            navigateTo('/pages/flight/detail/detail', {
+              ...flight
+            })
+          }}
+        >
+          <View className='item-price'>
+            <View className='flight-row'>
+              <View className='depart'>
+                <Text className='flight-time'>{dptTimeStr}</Text>
+                <Text className='airport-name'>
+                  {dptAirportName}
+                </Text>
+              </View>
+              <View className='separator'>
+                <View className='spt-arr'></View>
+              </View>
+              <View className='arrival'>
+                <Text className='flight-time'>{arrTimeStr}</Text>
+                <Text className='airport-name'>
+                  {arrAirportName}
+                </Text>
+              </View>
+            </View>
+            <Text className='flight-price color-red'>
+              ¥ {price}
+            </Text>
+          </View>
+          <View className='air-info'>
+            <Image className='logo' src={airIcon} />
+            <Text className='company-name'>{airCompanyName}</Text>
+          </View>
+        </View>
+      </Block>
+    )
+  }
 
   return (
     <View className='list-container'>
@@ -138,8 +194,12 @@ const FlightList = () => {
           id='flight-list'
         >
           {/* 性能优化篇：虚拟列表 */}
-          {/* <VirtualList className="flight-scroll-list" list={flightList} onRender={this.handleRender}></VirtualList> */}
-          <ScrollView
+          <VirtualList
+            className='flight-scroll-list'
+            list={flightList}
+            onRender={onRenderItem}
+          />
+          {/* <ScrollView
             className='flight-scroll-list'
             scrollY
             // scrollTop={scrollTop}
@@ -202,7 +262,7 @@ const FlightList = () => {
                 </Block>
               );
             })}
-          </ScrollView>
+          </ScrollView> */}
         </View>
       ) : (
         <View className='skeleton-box'>

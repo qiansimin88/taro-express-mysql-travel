@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import { View } from '@tarojs/components'
-import './index.scss'
 
 import FlightIndex from '../flight/index'
 import NoExploit from '../../components/noexploit'
-
+import './index.scss'
 
 // import { request } from '../../common/utils'
-
 
 const DEFAULT_TAB_LIST = [
   { title: "机票", tab: "flight", index: 0 },
