@@ -108,6 +108,8 @@ const FlightIndex = () => {
         if (result) {
           setAdList(result)
         }
+      }).catch(err => {
+        console.log(err)
       })
     // getLocation()
   }, [])

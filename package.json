@@ -56,6 +56,7 @@
 		"@tarojs/runtime": "3.6.22",
 		"@tarojs/shared": "3.6.22",
 		"@tarojs/taro": "3.6.22",
+		"ahooks": "^3.7.10",
 		"dayjs": "^1.11.10",
 		"express": "^4.18.2",
 		"hox": "^2.1.1",

@@ -1,5 +1,8 @@
 import path from "path";
 
+// 不同的客户端环境
+const TARO_ENV = process.env.TARO_ENV;
+
 const config = {
   projectName: "taro-express-mysql-travel",
   date: "2024-1-11",
@@ -10,7 +13,7 @@ const config = {
     828: 1.81 / 2,
   },
   sourceRoot: "src",
-  outputRoot: "dist",
+  outputRoot: `dist/${TARO_ENV}`,
   plugins: [],
   defineConstants: {},
   copy: {

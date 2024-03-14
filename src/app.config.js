@@ -4,9 +4,14 @@ export default {
     "pages/order/order",
     "pages/airportlist/index",
     "pages/calendar/index",
-    "pages/flight/list/list",
-    "pages/flight/detail/detail",
     "pages/login/login",
+  ],
+  // 分包  （不需要第一次就加载的跳转页面等等）
+  subPackages: [
+    {
+      root: "pages/flight",
+      pages: ["list/list", "detail/detail"],
+    },
   ],
   window: {
     backgroundTextStyle: "light",

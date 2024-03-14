@@ -42,6 +42,7 @@ const { sqlQuery } = require("../mysql");
 
 // 2. 设置接口路径
 router.get("/advertising", async (req, res) => {
+  console.log(222222222222222222222222222222);
   const sql = `select * from ads`;
   try {
     const result = await sqlQuery(sql);

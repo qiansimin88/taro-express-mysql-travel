@@ -1,8 +1,13 @@
-// eslint-disable-next-line
+/* eslint-disable */
 import { Component, memo, useState, useMemo } from "react";
 import Taro from "@tarojs/taro";
 import { View, ScrollView, Block } from "@tarojs/components";
+import { useEffect } from "react";
+import { useUpdateEffect } from 'ahooks';
 
+
+
+// 完整的虚拟列表包  地址  https://github.com/tingyuxuan2302/taro3-virtual-list
 /**
 /**
  * 虚拟列表  转换成指定个数的二维数组 能分段显示 相应的数据
@@ -33,11 +38,35 @@ const VirtualList = ({ list, _scrollViewProps, className, onRender, segmentNum =
 
   // 虚拟列表当前渲染的数据
   // eslint-disable-next-line
-  const [nowRenderList, setNowRenderList] = useState(listData.slice(0, 1))
+  const [nowRenderList, setNowRenderList] = useState(listData.slice(0, 1))  // 这是渲染数据的二维数组
+  const [nowRenderLisIndex, setNowRenderLisIndex] = useState(0)  // 当前渲染的二维数组的 index
+
+
+  // 滑倒底部的回调
+  const scrollToLowerHandler = () => {
+    setNowRenderLisIndex(x => {
+      // 小于二维数组的个数才能继续下拉
+      if (x < listData.length) {
+        return x + 1
+      } else {
+        return x
+      }
+    })
+  }
+
+  useUpdateEffect(() => {
+    setNowRenderList(listData.slice(0, nowRenderLisIndex + 1))
+  }, [nowRenderLisIndex])
+
+  // useEffect(() => {
+  //   console.log(listData)
+  //   console.log(nowRenderLisIndex)
+  // }, [nowRenderLisIndex])
 
   return (
     <ScrollView
       scrollY
+      onScrollToLower={() => scrollToLowerHandler()}
       style={{
         height: '100%',
       }}

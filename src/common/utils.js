@@ -17,6 +17,7 @@ export const request = ({
     Taro.request({
       url,
       method,
+      mode: "cors",
       data: params,
       ...other,
     })
